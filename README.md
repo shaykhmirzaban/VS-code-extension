@@ -99,3 +99,18 @@ CSS SNIPPT
 			"}",
 		]
 	}
+
+
+Chrome Extension
+================
+
+1) AIX Downloader
+2) WhatFont
+3) Wappalyzer
+4) React Developer Tools
+5) Redux DevTools
+6) Grepper
+7) JSON Formatter
+8) Grammarly
+9) GoFullPage
+
