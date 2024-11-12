@@ -117,3 +117,82 @@ Chrome Extension
 8) Grammarly
 9) GoFullPage
 
+JavaScript Important Code
+=========================
+
+let flag = true;
+window.onscroll = () => {
+    mainSection.forEach(sec => {
+        let top = window.scrollY + 89;
+        let offset = sec.offsetTop;
+        let height = sec.offsetHeight;
+        let id = sec.getAttribute("id");
+
+        if (top >= offset && top < offset + height) {
+            const matchingLink = document.querySelector('.desktopNav ul li a[href="#' + id + '"]');
+            const matchingLink01 = document.querySelector('.mobileNav ul li a[href="#' + id + '"]');
+            navLinks.forEach(links => {
+                links.classList.remove('active');
+            });
+            navLinks01.forEach(links => {
+                links.classList.remove('active');
+            });
+            matchingLink?.classList.add("active");
+            matchingLink01?.classList.add("active");
+        }
+    });
+
+
+
+    if (flag && (window.scrollY > 50)) {
+        flag = false;
+        nav.classList.add("active");
+    }
+
+    if ((window.scrollY < 50) && !flag) {
+        flag = true;
+        nav.classList.remove("active");
+    }
+};
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+
+        window.scrollTo({
+            top: targetSection.offsetTop - document.querySelector('nav').offsetHeight,
+            behavior: 'smooth'
+        });
+    });
+});
+
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.remove("animateElement");
+        } else {
+            entry.target.classList.add("animateElement");
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    var mainLoader = document.querySelector(".mainLoader");
+
+    // Use IntersectionObserver to detect when the main content is in view
+    var observer = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+            mainLoader.classList.add("hideElement");
+            document.body.style.overflowY = "auto";
+            observer.disconnect();
+        }
+    });
+
+    // Observe the main content
+    observer.observe(document.getElementById("home"));
+});
+
